@@ -13,10 +13,10 @@ function addWithNums(num1, num2) {
 }
 
 function add() {
-    console.log("calculated");
-    const calculationDescription = `${result} + ${userInput.value}`;
-    result = addWithNums(parseInt(userInput.value), result);
-    outputResult(result, calculationDescription);
+    const value = getUserNumberInput();
+    const initialResult = result;
+    result = result + value;
+    describeOutput('+', initialResult, value);
 }
 
 addWithNums(1, 2);
@@ -24,7 +24,7 @@ console.log(result);
 
 // Executing Functions "Indirectly" Using Variables
 
-addBtn.addEventListener('click', addWithNums);
+addBtn.addEventListener('click', add);
 
 /*
     We can add event listener to any html element. We can add event listener to button, div, span, etc.
@@ -55,3 +55,56 @@ addBtn.addEventListener('click', addWithNums);
  That's a direct way to call function.
  */
 
+ /*
+
+ Converting Data Types:
+    1. parseInt() -> convert string to integer (parseInt('5') -> 5)
+    2. parseFloat() -> convert string to float (parseFloat('5.5') -> 5.5
+    3. Number() -> convert string to number (Number('5') -> 5)
+    4. String() -> convert number to string (String(5) -> '5')
+    5. Boolean() -> convert string to boolean (Boolean('5') -> true)(Boolean('') -> false
+    6. !! -> convert string to boolean (!!'5' -> true)(!!'' -> false)
+    7. + -> convert string to number (+'5' -> 5) (+'' -> 0) (+true -> 1) (+false -> 0) (+null -> 0) (+undefined -> NaN) (+'5.5' -> 5.5)
+    8. - -> convert string to number (-'5' -> -5) (-'' -> -0) (-true -> -1) (-false -> -0) (-null -> -0) (-undefined -> NaN) (-'5.5' -> -5.5)
+    9. .toString() -> convert number to string (5.toString() -> error) (5..toString() -> '5') (5 .toString() -> '5')
+
+ */
+
+console.log(Number('5')); // 5
+console.log(5..toString()); // '5'
+console.log(5 .toString()); // '5'
+
+function getUserNumberInput() {
+    return parseInt(userInput.value);
+}
+
+function describeOutput(operation, initialResult, enteredNumber) {
+    const description = `${initialResult} ${operation} ${enteredNumber}`;
+    outputResult(result, description);
+    writeToLog(operation, initialResult, enteredNumber, result);
+}
+
+function multiply() {
+    const value = getUserNumberInput();
+    const initialResult = result;
+    result = result * value;
+    describeOutput('*', initialResult, value);
+}
+
+function subtract() {
+    const value = getUserNumberInput();
+    const initialResult = result;
+    result = result - value;
+    describeOutput('-', initialResult, value);
+}
+
+function divide() {
+    const value = getUserNumberInput();
+    const initialResult = result;
+    result = result / value;
+    describeOutput('/', initialResult, value);
+}
+
+subtractBtn.addEventListener('click', subtract);
+multiplyBtn.addEventListener('click', multiply);
+divideBtn.addEventListener('click', divide);

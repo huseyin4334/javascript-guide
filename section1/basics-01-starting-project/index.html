@@ -7,6 +7,35 @@
     <title>Basics</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="assets/styles/app.css" />
+
+
+    <script src="assets/scripts/vendor.js" defer></script>
+    <script src="assets/scripts/app.js" defer></script>
+    <script src="assets/scripts/app-array-objects.js" defer></script>
+    <script src="assets/scripts/app-functions.js" defer></script>
+
+    <!--
+      defer attribute is important. Because we want to execute our scripts after the DOM is loaded.
+      If we don't use defer attribute, our scripts will be executed before the DOM is loaded.
+      So we can't access the DOM elements.
+
+      We are saying with defer attribute, download scripts but not execute scripts before html parsed and dom loaded.
+      Execute scripts after html parsed and dom loaded.
+    -->
+
+    <!-- <script src="assets/scripts/app-functions.js" async></script> -->
+
+    <!--
+      async attribute is important. Because we want to execute our scripts as soon as possible.
+      We are using this attribute for scripts that we don't need to wait for DOM to be loaded.
+      If we don't use async attribute, our scripts will download and execute before the DOM is loaded. So DOM have to wait for scripts.
+
+      We are saying with async attribute, download scripts and execute scripts parallel with html parsing and dom loading.
+
+      If you use async attribute, We can't garantee the order of execution of scripts. 
+      We can garantee the order of execution of scripts with defer attribute.
+    -->
+
   </head>
   <body>
     <header>
@@ -28,9 +57,12 @@
     </section>
   </body>
 </html>
+<!--
 <script src="assets/scripts/vendor.js"></script>
 <script src="assets/scripts/app.js"></script>
+<script src="assets/scripts/app-array-objects.js"></script>
 <script src="assets/scripts/app-functions.js"></script>
+-->
 
 <!--
   if I create script tag in the head tag, it will be executed before the body tag is loaded
@@ -47,4 +79,14 @@
 <script>
   alert('Hello from the head tag!');
 </script>
+-->
+
+<!--
+  Developer tools -> Performance
+  You can see the performance of your app.
+  You can see the loading time of your app.
+  You can see details while browser is loading page. How is render page, how is parse html, how is execute scripts etc.
+  We can understand what is the bottleneck of our app.
+
+
 -->

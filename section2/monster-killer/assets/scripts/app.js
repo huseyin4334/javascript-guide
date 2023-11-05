@@ -1,18 +1,8 @@
 // User Input
-const enteredValue = prompt('Max health for you and the monster', '100');
-/*
-    prompt() is a function that allows us to ask the user for some input. It has two arguments: 
-    1. The first argument is the text that should be displayed in the prompt dialog.
-    2. The second argument is the default value that should be pre-filled in the input field of the prompt dialog.
-
-    The prompt() function returns the value that the user entered in the input field. Returns a string.
-*/
+// Identified in assets/scripts/errorHandling.js
 
 // Start Health
-const choseMaxLife = parseInt(enteredValue);
-if (isNaN(choseMaxLife) || choseMaxLife <= 0) {
-    choseMaxLife = 100;
-}
+// Identified in assets/scripts/errorHandling.js
 let currentMonsterHealth = choseMaxLife;
 let currentPlayerHealth = choseMaxLife;
 let hasBonusLife = true;

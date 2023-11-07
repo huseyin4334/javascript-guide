@@ -28,3 +28,13 @@ https://code.visualstudio.com/docs/getstarted/settings
 - Useful extensions
   - https://code.visualstudio.com/docs/editor/extension-marketplace
 - https://developer.chrome.com/docs/devtools/
+
+
+## DOM
+- DOM is parsed html code that converted javascript objects.
+- Firstly browser parse the html.
+- Js engine prepare DOM.
+- We can access this dom with apis by browser.
+- We can access html nodes with document.
+- We can access browser tab actions with window.
+- Window is global more than document.

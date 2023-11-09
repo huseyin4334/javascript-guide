@@ -52,8 +52,8 @@ function writeToLog(operationIdentifier, prevResult, operationNumber, newResult)
     6. includes() -> find element in array and return boolean (contains() in java)
     7. reverse() -> reverse array
     8. concat() -> concat two array
-    9. slice() -> slice array
-    10. splice() -> splice array
+    9. slice() -> slice array (array.slice(startIndex, endIndex)
+    10. splice() -> splice array (array.splice(startIndex, deleteCount, item1, item2, ...)
     11. forEach() -> iterate array
     12. map() -> iterate array and return new array
     13. filter() -> iterate array and return new array

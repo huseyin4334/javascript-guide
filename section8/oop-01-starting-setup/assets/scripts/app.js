@@ -1,17 +1,19 @@
-const productList = new ProductList();
+const productList = new ProductList(undefined, 'app');
 
 productList.push(
     new Product(
         'A Pillow',
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_rwh0WksvOp3tYZzM9X1vvw7Hiq6ZrR-MwolRvcVe_A&s',
         19.99,
-        'A soft pillow!'
+        'A soft pillow!',
+        'product-list'
     ),
     new Product(
         'A Carpet',
         'https://productimages.hepsiburada.net/s/394/375-500/110000418423833.jpg',
         89.99,
-        'A carpet which you might like - or not.'
+        'A carpet which you might like - or not.',
+        'product-list'
     )
 );
 

@@ -105,9 +105,23 @@ class ProjectItem {
   }
 
   connectDrag() {
-    document.getElementById(this.id).addEventListener('dragstart', event => {
+    const item = document.getElementById(this.id);
+    
+    item.addEventListener("dragstart", event => {
+      // https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/setData
       event.dataTransfer.setData('text/plain', this.id);
+      console.log('dragstart');
+      
+
+      // https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/effectAllowed
+      // This is the default behavior, but we can change it to 'move' or 'copy'
+      // effectAllowed is the operation that is allowed to be performed. So, if we set it to 'move', then the user can only move the element, not copy it.
       event.dataTransfer.effectAllowed = 'move';
+    });
+
+    item.addEventListener('dragend', event => {
+      console.log('dragend');
+      console.log(event);
     });
   }
 
@@ -148,6 +162,7 @@ class ProjectList {
       );
     }
     console.log(this.projects);
+    this.connectDroppable();
   }
 
   setSwitchHandlerFunction(switchHandlerFunction) {
@@ -165,6 +180,62 @@ class ProjectList {
     // this.projects.splice(projectIndex, 1);
     this.switchHandler(this.projects.find(p => p.id === projectId));
     this.projects = this.projects.filter(p => p.id !== projectId);
+  }
+
+  connectDroppable() {
+    const itemList = document.querySelector(`#${this.type}-projects ul`);
+
+    // dragenters are fired when the mouse enters a valid drop target just once, and then the dragover event fires every few hundred milliseconds.
+    // They have same behaviors. But dragenter is fired just once, and dragover is fired every few hundred milliseconds.
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/Document/dragenter_event
+    // The dragenter event is fired when a dragged element or text selection enters a valid drop target.
+    itemList.addEventListener("dragenter", event => {
+      if (event.dataTransfer.types[0] === 'text/plain') {
+        // We are preventing the default behavior of the browser because we want to control what happens when the user drags an element over another element.
+        event.preventDefault();
+        console.log("dragenter");
+
+        itemList.parentElement.classList.add("droppable");
+      }
+
+    });
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/Document/dragover_event
+    // The dragover event is fired when an element or text selection is being dragged over a valid drop target (every few hundred milliseconds).
+    itemList.addEventListener("dragover", event => {
+      console.log("dragover");
+    });
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/Document/dragleave_event
+    // The dragleave event is fired when a dragged element or text selection leaves a valid drop target.
+    itemList.addEventListener("dragleave", event => {
+      console.log(event.relatedTarget);
+      if (event.relatedTarget?.closest(`#${this.type}-projects ul`) !== itemList) {
+        itemList.parentElement.classList.remove("droppable");
+      }
+    });
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/Document/drop_event
+    // The drop event is fired when an element or text selection is dropped on a valid drop target.
+    itemList.addEventListener("drop", event => {
+      console.log("dropped");
+
+      const id = event.dataTransfer.getData('text/plain');
+
+      console.log(id);
+
+      if (this.projects.find(p => p.id === id)) {
+        return;
+      }
+
+      // It will drag element automatically.
+      document.getElementById(id).querySelector("button:last-of-type").click();
+
+      itemList.parentElement.classList.remove("droppable");
+
+      event.preventDefault();
+    });
   }
 }
 

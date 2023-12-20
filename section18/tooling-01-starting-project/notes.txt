@@ -1,0 +1,70 @@
+npm install --save-dev eslint
+    - This will install eslint as a dev dependency in your project
+    - You can also install eslint globally by running `npm install -g eslint`
+    - We installed eslint for dev, because we want to use it in local development, but we don't want to include it in our production build
+
+
+devDependencies
+- devDependencies are dependencies that are only needed for development and testing
+- devDependencies are not included in the production build
+- devDependencies are installed with the `--save-dev` flag
+
+
+General:
+- " ^ " means that we want to install the latest minor version of a package
+
+eslint:
+- eslint is a tool that helps us write better code
+- eslint is a linter
+- linter is a tool that analyzes our code and gives us suggestions on how to improve it
+- CTRL + SHIFT + P -> ESLint Configuration -> Create ESLint Configuration
+    - This will create a .eslintrc.json file in the root of your project
+    - This file is used to configure eslint
+- https://eslint.org/docs/user-guide/configuring
+- https://eslint.org/docs/user-guide/configuring/rules
+
+Webpack:
+- Webpack is a module bundler
+- Webpack takes all of our code and assets and bundles them into a single file (bundle.js)
+- Webpack is configured using a webpack.config.js file
+- npm install --save-dev webpack webpack-cli
+    - webpack-cli is a command line interface for webpack
+- src is the source folder, this is where we put all of our code
+- dist is the distribution folder, this is where webpack will put our bundled code
+    - Dist folder is created by webpack automatically, But we can create it manually if we want
+    - Our folder is assets/scripts, but webpack will bundle our code into dist/main.js
+- We add a script to our package.json file to run webpack
+    - "build": "webpack --config webpack.config.js"
+        - We dont have to specify the config file, because webpack will look for a file called webpack.config.js by default
+    - We can now run `npm run build` to run webpack
+- If you will use webpack, you shouldn't use .js in your import statements
+    - import { ProjectList } from './App.js';
+    - import { ProjectList } from './App';
+
+Dev Server For Webpack:
+- npm install --save-dev webpack-dev-server
+- We add a script to our package.json file to run webpack-dev-server
+    - "build:dev": "webpack-dev-server --config webpack.config.js"
+- We need this for reloaad changes. If we change something in our code, we want the browser to reload automatically
+
+Clean Plugin:
+- npm install --save-dev clean-webpack-plugin
+- This plugin will clean the dist folder before each build
+- We need this because webpack will not delete old files from the dist folder, it will just add new files
+- We add this plugin to our webpack.config.js file
+    - const CleanPlugin = require('clean-webpack-plugin');
+    - plugins: [new CleanPlugin.CleanWebpackPlugin()]
+
+
+Third Party Libraries:
+- We can install third party libraries using npm
+- npm install --save lodash
+- npm will add lodash to our dependencies in package.json
+    -  dependencies: {
+            "lodash": "^4.17.15"
+        }
+- We can now import lodash in our code
+    - import _ from 'lodash';
+    - import { cloneDeep } from 'lodash';
+    - import cloneDeep from 'lodash/cloneDeep';
+- We can now use lodash in our code

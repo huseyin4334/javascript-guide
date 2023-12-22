@@ -1,0 +1,28 @@
+const userId = 'u123';
+
+sessionStorage.setItem('uid', userId);
+
+const storedId = sessionStorage.getItem('uid');
+
+console.log(storedId === userId); // true
+
+sessionStorage.removeItem('uid');
+
+
+const user = {
+    name: 'Max',
+    age: 30,
+    hobbies: ['Sports', 'Cooking']
+};
+
+sessionStorage.setItem('user', user);
+
+const storedUser = sessionStorage.getItem('user');
+
+console.log(storedUser === user); // false
+
+sessionStorage.setItem('user2', JSON.stringify(user));
+
+const storedUser2 = JSON.parse(sessionStorage.getItem('user2'));
+
+console.log(storedUser2);
